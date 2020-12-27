@@ -1,0 +1,90 @@
+@import "../../styles/core/_variables.scss";
+.homepage {
+  .home-banner {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    > p {
+      max-width: 650px;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem !important;
+      color: black !important;
+      text-align: center;
+    }
+    .desc {
+      color: black;
+      font-size: 1rem;
+    }
+  }
+  button.primary {
+    padding: 1rem 2rem;
+    color: white !important;
+    background-color: $primary-bg;
+    border-radius: 100rem;
+    border: 0px;
+  }
+  .subtitle {
+    color: $primary-bg;
+    font-size: 2rem;
+  }
+  .desc {
+    color: black;
+    font-size: 1.7rem;
+  }
+  #hot-deal {
+    display: grid;
+    grid-template-columns: 0.8fr 1fr;
+    padding: 5rem 1rem;
+    .info {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      .price {
+        font-size: 3rem;
+        font-weight: bold;
+      }
+    }
+  }
+  #best-seller,
+  #blog,
+  #offers {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    .brand-box {
+      text-align: center;
+      .d-block {
+        img {
+          margin-bottom: 1rem;
+        }
+      }
+    }
+  }
+
+  #blog {
+    img {
+      border-radius: 0.5rem;
+      margin: 1.1rem;
+    }
+  }
+
+  #testimonials {
+    margin-bottom: 4rem;
+    img {
+      border-radius: 100rem;
+      border: 3px solid white;
+    }
+    .carousel-dot-list-style {
+      background-color: $primary-bg;
+    }
+    background: url("https://cdn.shopify.com/s/files/1/0024/1152/8253/files/img-bg-1.jpg?v=1524931209");
+  }
+}

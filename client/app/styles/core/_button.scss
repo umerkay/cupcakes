@@ -1,10 +1,10 @@
 // start input button styles
-input[type='button'],
-input[type='submit'],
-input[type='reset'],
-button[type='button'],
-button[type='submit'],
-button[type='reset'],
+input[type="button"],
+input[type="submit"],
+input[type="reset"],
+button[type="button"],
+button[type="submit"],
+button[type="reset"],
 button {
   border: none;
   background: transparent;
@@ -72,6 +72,7 @@ button {
     background-color: $btn-bg;
     -webkit-transition: $layout-transition-speed;
     transition: $layout-transition-speed;
+    padding: 2rem;
 
     .btn-text {
       -webkit-transition: $layout-transition-speed;
