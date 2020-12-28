@@ -35,9 +35,13 @@ class Homepage extends React.PureComponent {
             {banners.map((item, index) => (
               <>
                 <div class="home-banner" style={{ background: item.imageUrl }}>
-                  <h1 className="title">{item.title}</h1>
-                  <p class="desc">{item.desc}</p>
-                  <Button className="primary">Try Our Cupcakes</Button>
+                  <div>
+                    <h1 className="title">{item.title}</h1>
+                    <p class="desc">{item.desc}</p>
+                    <Link to="/brands">
+                      <Button className="primary">View Brands</Button>
+                    </Link>
+                  </div>
                 </div>
               </>
             ))}
@@ -46,13 +50,14 @@ class Homepage extends React.PureComponent {
         <div id="hot-deal">
           <div class="img">
             <img
-              src="https://cdn.shopify.com/s/files/1/0024/1152/8253/files/counter-555x431_grande.png?v=1525057481"
+              src="https://sc01.alicdn.com/kf/HTB1BC.safvsK1Rjy0Fiq6zwtXXa9/228359859/HTB1BC.safvsK1Rjy0Fiq6zwtXXa9.jpg_.webp"
               alt=""
+              width="100%"
             />
           </div>
           <div class="info">
             <div class="subtitle">Hot Deal Today</div>
-            <div class="desc">Vanilla cupcake with red sugar flowers</div>
+            <div class="desc">Traditional Crockery</div>
             <div class="price">$16.00</div>
             <Button className="primary">Order Now</Button>
           </div>
@@ -64,7 +69,11 @@ class Homepage extends React.PureComponent {
             {bestSellers.map((brand, index) => (
               <Col xs="6" md="4" lg="3" key={index} className="mb-3 px-2">
                 <div className="brand-box">
-                  <Link to={`/shop/brand/${brand.id}`} className="d-block">
+                  <Link
+                    to={`/product/nike-air-max-270-react-se`}
+                    className="d-block"
+                  >
+                    {/* <Link to={`/shop/brand/${brand.id}`} className="d-block"> */}
                     <img src={brand.imageUrl} alt="" />
                     <h4>{brand.title}</h4>
                     <p className="brand-desc">{brand.desc}</p>
@@ -87,10 +96,12 @@ class Homepage extends React.PureComponent {
             {reviews.map((item, index) => (
               <>
                 <div class="home-banner">
-                  <img src={item.imageUrl} width="150px" alt="" />
-                  <h1 className="title">{item.title}</h1>
-                  <p class="desc">{item.desc}</p>
-                  <Button className="primary">Try Our Cupcakes</Button>
+                  <div>
+                    <img src={item.imageUrl} width="150px" alt="" />
+                    <h1 className="title">{item.title}</h1>
+                    <p class="desc">{item.desc}</p>
+                    <Button className="primary">Try Our Cupcakes</Button>
+                  </div>
                 </div>
               </>
             ))}
@@ -136,7 +147,11 @@ class Homepage extends React.PureComponent {
                 {bestSellers.map((brand, index) => (
                   <Col key={index} className="mb-3 px-2">
                     <div className="brand-box">
-                      <Link to={`/shop/brand/${brand.id}`} className="">
+                      {/* <Link to={`/shop/brand/${brand.id}`} className=""> */}
+                      <Link
+                        to={`/product/nike-air-max-270-react-se`}
+                        className=""
+                      >
                         <div
                           className="flex-sm-row"
                           style={{ display: "flex" }}
@@ -184,7 +199,7 @@ class Homepage extends React.PureComponent {
             </Row>
           </div>
         </div>
-        <div id="blog">
+        {/* <div id="blog">
           <div class="subtitle">Sub Title</div>
           <div class="desc">LATEST BLOG</div>
           <Row>
@@ -202,7 +217,7 @@ class Homepage extends React.PureComponent {
               </Row>
             </Col>
           </Row>
-        </div>
+        </div> */}
       </div>
     );
   }

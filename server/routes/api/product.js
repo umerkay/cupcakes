@@ -1,23 +1,23 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const multer = require('multer');
-const AWS = require('aws-sdk');
+const multer = require("multer");
+const AWS = require("aws-sdk");
 
 // Bring in Models & Helpers
-const Product = require('../../models/product');
-const Brand = require('../../models/brand');
-const Category = require('../../models/category');
-const auth = require('../../middleware/auth');
-const role = require('../../middleware/role');
+const Product = require("../../models/product");
+const Brand = require("../../models/brand");
+const Category = require("../../models/category");
+const auth = require("../../middleware/auth");
+const role = require("../../middleware/role");
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage });
 
 router.post(
-  '/add',
+  "/add",
   auth,
   role.checkRole(role.ROLES.Admin),
-  upload.single('image'),
+  upload.single("image"),
   async (req, res) => {
     try {
       const sku = req.body.sku;
@@ -30,52 +30,52 @@ router.post(
       const image = req.file;
 
       if (!sku) {
-        return res.status(400).json({ error: 'You must enter sku.' });
+        return res.status(400).json({ error: "You must enter sku." });
       }
 
       if (!description || !name) {
         return res
           .status(400)
-          .json({ error: 'You must enter description & name.' });
+          .json({ error: "You must enter description & name." });
       }
 
       if (!quantity) {
-        return res.status(400).json({ error: 'You must enter a quantity.' });
+        return res.status(400).json({ error: "You must enter a quantity." });
       }
 
       if (!price) {
-        return res.status(400).json({ error: 'You must enter a price.' });
+        return res.status(400).json({ error: "You must enter a price." });
       }
 
       const foundProduct = await Product.findOne({ sku });
 
       if (foundProduct) {
-        return res.status(400).json({ error: 'This sku is already in use.' });
+        return res.status(400).json({ error: "This sku is already in use." });
       }
 
-      let imageUrl = '';
-      let imageKey = '';
+      let imageUrl = "";
+      let imageKey = "";
 
-      if (image) {
-        const s3bucket = new AWS.S3({
-          accessKeyId: process.env.AWS_ACCESS_KEY_ID,
-          secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
-          region: process.env.AWS_REGION
-        });
+      // if (image) {
+      //   const s3bucket = new AWS.S3({
+      //     accessKeyId: process.env.AWS_ACCESS_KEY_ID,
+      //     secretAccessKey: process.env.AWS_SECRET_ACCESS_KEY,
+      //     region: process.env.AWS_REGION,
+      //   });
 
-        const params = {
-          Bucket: process.env.AWS_BUCKET_NAME,
-          Key: image.originalname,
-          Body: image.buffer,
-          ContentType: image.mimetype,
-          ACL: 'public-read'
-        };
+      //   const params = {
+      //     Bucket: process.env.AWS_BUCKET_NAME,
+      //     Key: image.originalname,
+      //     Body: image.buffer,
+      //     ContentType: image.mimetype,
+      //     ACL: "public-read",
+      //   };
 
-        const s3Upload = await s3bucket.upload(params).promise();
+      //   const s3Upload = await s3bucket.upload(params).promise();
 
-        imageUrl = s3Upload.Location;
-        imageKey = s3Upload.key;
-      }
+      //   imageUrl = s3Upload.Location;
+      //   imageKey = s3Upload.key;
+      // }
 
       const product = new Product({
         sku,
@@ -86,7 +86,7 @@ router.post(
         taxable,
         brand,
         imageUrl,
-        imageKey
+        imageKey,
       });
 
       const savedProduct = await product.save();
@@ -94,144 +94,144 @@ router.post(
       res.status(200).json({
         success: true,
         message: `Product has been added successfully!`,
-        product: savedProduct
+        product: savedProduct,
       });
     } catch (error) {
       return res.status(400).json({
-        error: 'Your request could not be processed. Please try again.'
+        error: "Your request could not be processed. Please try again.",
       });
     }
   }
 );
 
 // fetch product api
-router.get('/item/:slug', (req, res) => {
+router.get("/item/:slug", (req, res) => {
   const slug = req.params.slug;
 
   Product.findOne({ slug })
-    .populate('brand')
+    .populate("brand")
     .exec((err, data) => {
       if (err) {
         return res.status(400).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       if (!data) {
         return res.status(404).json({
-          message: 'No product found.'
+          message: "No product found.",
         });
       }
 
       res.status(200).json({
-        product: data
+        product: data,
       });
     });
 });
 
 // fetch all products api
-router.get('/list', (req, res) => {
+router.get("/list", (req, res) => {
   Product.find({})
-    .populate('brand', 'name')
+    .populate("brand", "name")
     .exec((err, data) => {
       if (err) {
         return res.status(400).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
       res.status(200).json({
-        products: data
+        products: data,
       });
     });
 });
 
 // fetch all products by category api
-router.get('/list/category/:slug', (req, res) => {
+router.get("/list/category/:slug", (req, res) => {
   const slug = req.params.slug;
 
-  Category.findOne({ slug: slug }, 'products -_id')
-    .populate('products')
+  Category.findOne({ slug: slug }, "products -_id")
+    .populate("products")
     .exec((err, data) => {
       if (err) {
         return res.status(400).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       if (!data) {
         return res.status(404).json({
-          message: 'No products found.'
+          message: "No products found.",
         });
       }
 
       res.status(200).json({
-        products: data ? data.products : data
+        products: data ? data.products : data,
       });
     });
 });
 
 // fetch all products by brand api
-router.get('/list/brand/:slug', (req, res) => {
+router.get("/list/brand/:slug", (req, res) => {
   const slug = req.params.slug;
 
   Brand.find({ slug }, (err, brand) => {
     if (err) {
       return res.status(400).json({
-        error: 'Your request could not be processed. Please try again.'
+        error: "Your request could not be processed. Please try again.",
       });
     }
 
     if (brand.length <= 0) {
       return res.status(404).json({
-        message: `Cannot find brand with the slug: ${slug}.`
+        message: `Cannot find brand with the slug: ${slug}.`,
       });
     }
 
     Product.find({ brand: brand[0]._id })
-      .populate('brand', 'name')
+      .populate("brand", "name")
       .exec((err, data) => {
         if (err) {
           return res.status(400).json({
-            error: 'Your request could not be processed. Please try again.'
+            error: "Your request could not be processed. Please try again.",
           });
         }
         res.status(200).json({
-          products: data
+          products: data,
         });
       });
   });
 });
 
-router.get('/list/select', auth, (req, res) => {
-  Product.find({}, 'name', (err, data) => {
+router.get("/list/select", auth, (req, res) => {
+  Product.find({}, "name", (err, data) => {
     if (err) {
       return res.status(400).json({
-        error: 'Your request could not be processed. Please try again.'
+        error: "Your request could not be processed. Please try again.",
       });
     }
 
     res.status(200).json({
-      products: data
+      products: data,
     });
   });
 });
 
 router.delete(
-  '/delete/:id',
+  "/delete/:id",
   auth,
   role.checkRole(role.ROLES.Admin),
   (req, res) => {
     Product.deleteOne({ _id: req.params.id }, (err, data) => {
       if (err) {
         return res.status(400).json({
-          error: 'Your request could not be processed. Please try again.'
+          error: "Your request could not be processed. Please try again.",
         });
       }
 
       res.status(200).json({
         success: true,
         message: `Product has been deleted successfully!`,
-        product: data
+        product: data,
       });
     });
   }

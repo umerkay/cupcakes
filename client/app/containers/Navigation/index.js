@@ -94,13 +94,7 @@ class Navigation extends React.PureComponent {
                   onClick={toggleMenu}
                 />
                 <Link to="/">
-                  <h1 className="logo">
-                    <img
-                      src="https://cdn.shopify.com/s/files/1/0024/1152/8253/files/logo-1.png?v=1524323751"
-                      alt=""
-                      width="80"
-                    />
-                  </h1>
+                  <h1 className="logo">GandomSuperMarket</h1>
                 </Link>
               </div>
             </Col>
