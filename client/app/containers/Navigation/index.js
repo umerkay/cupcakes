@@ -6,6 +6,8 @@
 
 import React from "react";
 import { connect } from "react-redux";
+import "./index.scss";
+import SearchField from "react-search-field";
 
 import { Link, NavLink as ActiveLink, withRouter } from "react-router-dom";
 
@@ -121,6 +123,7 @@ class Navigation extends React.PureComponent {
               lg={{ size: 9, order: 3 }}
             >
               <Navbar color="light" light expand="md">
+                <SearchField placeholder="Search..." classNames="search" />
                 <CartIcon
                   className="d-none d-md-block"
                   cartItems={cartItems}

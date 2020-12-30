@@ -15,7 +15,12 @@ const Footer = () => {
   const infoLinks = [
     { id: 0, name: "Contact Us", to: "/contact" },
     // { id: 1, name: "Sell With Us", to: "/sell" },
-    { id: 2, name: "Shipping", to: "/shipping" },
+    // { id: 2, name: "Shipping", to: "/shipping" },
+    { id: 3, name: "FAQs", to: "/faqs" },
+    { id: 4, name: "Terms of Service", to: "/terms" },
+    { id: 4, name: "Privacy Policy", to: "/terms" },
+    { id: 4, name: "Return Policy", to: "/terms" },
+    { id: 4, name: "About Us", to: "/about" },
   ];
 
   const footerBusinessLinks = (
