@@ -6,6 +6,7 @@
 
 import React from "react";
 import { connect } from "react-redux";
+import Filters from "../../components/Filters";
 
 import actions from "../../actions";
 
@@ -20,7 +21,8 @@ class BrandsPage extends React.PureComponent {
     const { brands } = this.props;
 
     return (
-      <div className="brands-page">
+      <div className="brands-page" style={{ display: "flex", gap: "1rem" }}>
+        <Filters></Filters>
         <BrandList brands={[...brands, ...brands, ...brands]} />
       </div>
     );

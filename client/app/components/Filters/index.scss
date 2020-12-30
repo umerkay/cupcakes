@@ -1,0 +1,49 @@
+.filtercontainer {
+  .filtercontent {
+    position: sticky;
+    top: 160px;
+    // width: 200px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px;
+    min-height: 70vh;
+    margin: 1rem 0rem;
+    border-radius: 0.5rem;
+    padding: 0.5rem;
+    width: 200px;
+
+    .filter {
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.25em;
+
+      input {
+        padding-left: 0.5em;
+      }
+
+      .title {
+        font-size: 1.2rem;
+        // text-align: center;
+      }
+      .optcard {
+        background-color: white;
+        box-shadow: rgba(0, 0, 0, 0.493) 0px 0px 4px;
+        border-radius: 0.5rem;
+        height: 100px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+        margin: 0.5rem;
+        .img > img {
+          width: 100px;
+        }
+      }
+    }
+  }
+  input {
+    padding: 0.5rem;
+    border-radius: 0.25rem;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 0px 4px;
+    border: 1px grey;
+  }
+}

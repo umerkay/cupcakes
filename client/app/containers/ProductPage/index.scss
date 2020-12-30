@@ -1,0 +1,17 @@
+#best-seller {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  .brand-box {
+    text-align: center;
+    .d-block {
+      img {
+        margin-bottom: 1rem;
+        width: 100%;
+        border-radius: 1rem;
+      }
+    }
+  }
+}
